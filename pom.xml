@@ -27,5 +27,6 @@
 	<modules>
 		<module>learnj-concurrent</module>
 		<module>learnj-nio</module>
+		<module>guice</module>
 	</modules>
 </project>

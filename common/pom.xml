@@ -5,12 +5,13 @@
     <artifactId>learnj-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>learnj-nio</artifactId>
+  <artifactId>learnj-common</artifactId>
+  <name>learnj-common</name>
   <dependencies>
   	<dependency>
-  		<groupId>org.learnj</groupId>
-  		<artifactId>learnj-common</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
+  		<groupId>com.google.inject</groupId>
+  		<artifactId>guice</artifactId>
+  		<version>4.0</version>
   	</dependency>
   </dependencies>
 </project>

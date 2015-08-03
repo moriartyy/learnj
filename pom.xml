@@ -25,8 +25,11 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>learnj-concurrent</module>
-		<module>learnj-nio</module>
+	    <module>common</module>
+		<module>concurrent</module>
+		<module>nio</module>
 		<module>guice</module>
+		<module>mq</module>
+		<module>metrics</module>
 	</modules>
 </project>

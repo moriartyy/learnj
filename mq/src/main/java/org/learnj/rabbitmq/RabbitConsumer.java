@@ -1,14 +1,8 @@
 package org.learnj.rabbitmq;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Map;
 import java.util.concurrent.Executors;
 
-import org.learnj.common.text.Strings;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;  
 import com.rabbitmq.client.Connection;  
@@ -22,9 +16,10 @@ public class RabbitConsumer {
 
 	public static void main(String[] args) throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("192.168.1.16");
-		factory.setUsername("admin");
-		factory.setPassword("admin");
+		factory.setHost(RabbitmqConf.serverHost);
+		factory.setPort(RabbitmqConf.serverPort);
+		factory.setUsername(RabbitmqConf.userName);
+		factory.setPassword(RabbitmqConf.password);
 		factory.setSharedExecutor(Executors.newSingleThreadExecutor());
 		System.out.println("Factory created.");
 		
@@ -32,15 +27,15 @@ public class RabbitConsumer {
 		Channel channel = connection.createChannel();
 		System.out.println("Channel created.");
 		
-		String quque = "sku-sync-test";
+		String quque = RabbitmqConf.topicQueue;
 		try {
 			channel.queueDeclare(quque, true, false, false, null);
-			channel.queueBind(quque, "exchange_search_v1", "sku.#");
+			channel.queueBind(quque, RabbitmqConf.topicExchange, "book.#");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
         
-        boolean autoAck = false;
+        boolean autoAck = true;
         System.out.println("Waiting for incoming message...");
         channel.basicConsume(quque, autoAck, "test_consumer1",
              new DefaultConsumer(channel) {
@@ -56,16 +51,12 @@ public class RabbitConsumer {
                      System.out.println("Received: " + routingKey + "#" + deliveryTag);
                      System.out.println("Thread: " + Thread.currentThread().getId());
                      System.out.println("---------------------------------------------------");
-                     String asc = new String(body, "US-ASCII");
-                     System.out.println(asc);
-                     System.out.println("---------------------------------------------------");
-                     Map<String, String> map = new Gson().fromJson(asc, new TypeToken<Map<String, String>>() {}.getType());
-                     System.out.println(map.get("title"));
+                     String message = new String(body);
+                     System.out.println(message);
                      System.out.println("---------------------------------------------------");
                      System.out.println();
                      System.out.println();
 //                     channel.basicAck(deliveryTag, false);
-//                     channel.basicReject(deliveryTag, true);
                      try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {

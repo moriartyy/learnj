@@ -2,6 +2,7 @@ package org.learnj.guice;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+
 import static java.lang.System.out;
 
 public class LoggerMethodInterceptor implements MethodInterceptor {

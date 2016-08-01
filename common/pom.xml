@@ -6,8 +6,7 @@
 		<artifactId>learnj-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>learnj-common</artifactId>
-	<name>learnj-common</name>
+	<artifactId>common</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.inject</groupId>

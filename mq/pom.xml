@@ -6,7 +6,7 @@
 		<artifactId>learnj-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>learnj-mq</artifactId>
+	<artifactId>mq</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
@@ -15,7 +15,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.learnj</groupId>
-			<artifactId>learnj-common</artifactId>
+			<artifactId>common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

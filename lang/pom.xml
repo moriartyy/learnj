@@ -5,11 +5,11 @@
     <artifactId>learnj-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>learnj-lang</artifactId>
+  <artifactId>lang</artifactId>
   <dependencies>
   	<dependency>
   		<groupId>org.learnj</groupId>
-  		<artifactId>learnj-common</artifactId>
+  		<artifactId>common</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

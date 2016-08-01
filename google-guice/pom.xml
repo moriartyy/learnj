@@ -5,8 +5,7 @@
     <artifactId>learnj-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>learnj-guice</artifactId>
-  <name>learnj-guice</name>
+  <artifactId>guice</artifactId>
   <dependencies>
   	<dependency>
   		<groupId>com.google.inject</groupId>

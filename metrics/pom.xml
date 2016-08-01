@@ -6,8 +6,7 @@
 		<artifactId>learnj-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>learnj-metrics</artifactId>
-	<name>learnj-metrics</name>
+	<artifactId>metrics</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>

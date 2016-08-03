@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://code.alibabatech.com/schema/dubbo
+	   http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="callback-provider"/>
+
+    <dubbo:registry address="N/A"/>
+    <dubbo:protocol name="dubbo" port="20880" threadpool="cached">
+        <dubbo:parameter key="callback.async" value="true"/>
+    </dubbo:protocol>
+
+    <dubbo:provider delay="-1">
+        <dubbo:parameter key="qloglevel" value="2" />
+        <dubbo:parameter key="server" value="netty" />
+        <dubbo:parameter key="client" value="netty" />
+    </dubbo:provider>
+
+    <!--<dubbo:registry id="fareenginereg" protocol="zookeeper" address="${dubbo.fareengine.registry.address}" group="${dubbo.fareengine.group}" />-->
+    <!--<dubbo:protocol name="dubbo" port="20880" threads="500" payload="16777216"/>-->
+
+
+
+    <bean id="callbackService" class="org.learnj.dubbo.provider.CallbackServiceImpl"/>
+
+    <dubbo:service interface="org.learnj.dubbo.api.CallbackService" ref="callbackService"
+                   executes="100" callbacks="500" timeout="50000">
+        <dubbo:method name="call">
+            <dubbo:argument type="org.learnj.dubbo.api.CallbackListener" callback="true" />
+        </dubbo:method>
+    </dubbo:service>
+
+    <bean id="echoService" class="org.learnj.dubbo.provider.EchoServiceImpl" />
+    <dubbo:service protocol="dubbo" interface="org.learnj.dubbo.api.EchoService" ref="echoService" executes="100" callbacks="500" timeout="50000">
+    </dubbo:service>
+</beans>

@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>Av Search</title>
+    <style>
+        body {
+            margin: 0px;
+            font: simsun;
+        }
+
+        form {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .container {
+            border: 1px solid black;
+            display: inline-block;
+            margin-top: 5px;
+            margin-left:10px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .item {
+            padding: 10px;
+            width: 600px;
+        }
+
+        .item_button {
+            text-align: center;
+        }
+
+        .item_button input {
+            width: 150px;
+            height: 40px;
+        }
+
+        .bar {
+            margin: 10px;
+        }
+
+        .bar_table input {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="bar">
+    <form method="get" target="_blank" action="${itinerarySearchUrl}">
+        <div>
+            <table class="bar_table">
+                <tr>
+                    <td>DepCity:</td>
+                    <td><input type="text" name="depCity" value="${depCity}"/></td>
+                </tr>
+                <tr>
+                    <td>ArrCity:</td>
+                    <td><input type="text" name="arrCity" value="${arrCity}"/></td>
+                </tr>
+                <tr>
+                    <td>DepDate:</td>
+                    <td><input type="text" name="depDate" value="${depDate}"/></td>
+                </tr>
+                <tr>
+                    <td>RetDate:</td>
+                    <td><input type="text" name="retDate" value="${retDate}"/></td>
+                </tr>
+            </table>
+        </div>
+        <div><input type="submit" value="Search Itinerary"></div>
+    </form>
+</div>
+<div style="height: 60px;"></div>
+</body>
+</html>

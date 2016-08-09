@@ -9,7 +9,7 @@ import org.learnj.common.component.AbstractLiftcycleComponent;
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 
-public class UDPNonblockingClient extends AbstractLiftcycleComponent {
+public class UDPNonblockingClient {
 
     private static final int TIMEOUT = 3000; // Resend timeout (milliseconds)
     

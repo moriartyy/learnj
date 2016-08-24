@@ -1,68 +1,66 @@
-package org.learnj.nio;
+package org.learnj.nio.tcp;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
-public class NIOClient {
+public class NIOServer {
 	
 	private Selector selector;
-	private SocketChannel channel;
-	private String address;
-	private int port;
 
-	public NIOClient(String address, int port) {
-		this.address = address;
-		this.port = port;
+	public NIOServer(int port) {
 		try {
-			initialize();
+			this.init(port);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
 		}
 	}
 	
-	private void initialize() throws Exception {
-		channel = SocketChannel.open();
+	private void init(int port) throws IOException {
+		ServerSocketChannel channel = ServerSocketChannel.open();
 		channel.configureBlocking(false);
+		print("Try binding to " + port);
+		channel.bind(new InetSocketAddress(port));
+		print("Open selector...");
 		selector = Selector.open();
-		channel.register(selector, SelectionKey.OP_CONNECT);
+		print("Register selector...");
+		channel.register(selector, SelectionKey.OP_ACCEPT);
 	}
 	
 	public void start() {
+		print("Starting server...");
 		try {
 			doStart();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+		print("Server started.");
+		print("Waiting for incoming connections...");
 	}
 	
-	private void doStart() throws Exception {
-		channel.connect(new InetSocketAddress(address, port));
+	public void doStart() throws Exception {
+		
 		while (true) {
 			selector.select();
 			Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
 			while (iterator.hasNext()) {
 				SelectionKey key = iterator.next();
 				iterator.remove();
-				if (key.isConnectable()) {
-					SocketChannel channelx = (SocketChannel)key.channel();
-					if (channelx == channel) {
-						print("Same");
-					}
-					
-					if (channelx.isConnectionPending()) {
-						channelx.finishConnect();
-					}
-					channelx.configureBlocking(false);
-					ByteBuffer outBuffer = ByteBuffer.wrap("Hello, is anybody there?".getBytes());
+				if (key.isAcceptable()) {
+					print("Accepting a conneciton.");
+					ServerSocketChannel serverChannel = (ServerSocketChannel)key.channel();
+					SocketChannel clientChannel = serverChannel.accept();
+					clientChannel.configureBlocking(false);
+					ByteBuffer outBuffer = ByteBuffer.wrap("Welcome, What can i do for you?".getBytes());
 					while (outBuffer.hasRemaining()) {
-						channel.write(outBuffer);
+						clientChannel.write(outBuffer);
 					}
-					channelx.register(selector, SelectionKey.OP_READ);
+					clientChannel.register(selector, SelectionKey.OP_READ);
 				} else if (key.isReadable()) {
 					print("Reading message");
 					SocketChannel channel = (SocketChannel) key.channel();
@@ -74,23 +72,23 @@ public class NIOClient {
 						buffer.clear();
 					}
 					String message = new String(stream.toByteArray());
-					print("Received message: " + message);
-					ByteBuffer outBuffer = ByteBuffer.wrap("Message received.".getBytes());
+					print(channel.getRemoteAddress() + message);
+					ByteBuffer outBuffer = ByteBuffer.wrap("Sorry, I don't understand.".getBytes());
 					while (outBuffer.hasRemaining()) {
 						channel.write(outBuffer);
 					}
-					
 				}
 			}
 		}
 	}
 	
 	private void print(String message) {
-		System.out.println("[Client]" + message);
+		System.out.println("[Server]" + message);
 	}
 	
 	public static void main(String[] args) {
-		NIOClient client = new NIOClient("127.0.0.1", 1234);
-		client.start();
+		NIOServer server = new NIOServer(1234);
+		server.start();
 	}
+
 }

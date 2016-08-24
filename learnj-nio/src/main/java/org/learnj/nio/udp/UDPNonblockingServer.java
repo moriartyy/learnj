@@ -10,12 +10,10 @@ import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 
-import org.learnj.common.component.AbstractLiftcycleComponent;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 
-public class UDPNonblockingServer extends AbstractLiftcycleComponent {
+public class UDPNonblockingServer {
 
     private static final int TIMEOUT = 3000; // Wait timeout (milliseconds)
     private volatile boolean isRunning = false;
@@ -95,8 +93,7 @@ public class UDPNonblockingServer extends AbstractLiftcycleComponent {
         }
     }
 
-	@Override
-	protected void doStart() throws Exception {
+	public void start() {
 		isRunning = true;
 		thread = new Thread() {
 			
@@ -108,8 +105,7 @@ public class UDPNonblockingServer extends AbstractLiftcycleComponent {
 		thread.start();
 	}
 
-	@Override
-	protected void doStop() throws Exception {
+	public void stop()  {
 		isRunning = false;
 		while (thread.isAlive()) {
 			try {
@@ -118,10 +114,4 @@ public class UDPNonblockingServer extends AbstractLiftcycleComponent {
 			}
 		}
 	}
-
-	@Override
-	protected void doClose() throws Exception {
-		doStop();
-	}
-
 }

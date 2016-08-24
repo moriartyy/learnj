@@ -2,6 +2,7 @@ package org.learnj.spring.mvc.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.GsonBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,9 @@ import java.util.Map;
 @Controller
 public class SearchController {
 
+    @Autowired
+    private AnyBean anyBean;
+
     @RequestMapping(value = "/s", produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public Object search(HttpServletRequest request) {
@@ -23,6 +27,7 @@ public class SearchController {
         Map<String, Object> map = ImmutableMap.<String, Object>builder()
                 .put("query", params.getString("query"))
                 .put("queryString", request.getQueryString())
+                .put("anybena", anyBean.name())
                 .build();
         return new GsonBuilder().create().toJson(map);
     }

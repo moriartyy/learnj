@@ -1,10 +1,9 @@
 package org.learnj.nio.udp;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
-
-import org.learnj.common.component.AbstractLiftcycleComponent;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
@@ -42,17 +41,15 @@ public class UDPNonblockingClient {
 		}
     }
 
-	@Override
-	protected void doStart() throws Exception {
+	public void start() {
 	}
 
-	@Override
-	protected void doStop() throws Exception {
-		channel.close();
+	public void stop() {
+		try {
+			channel.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@Override
-	protected void doClose() throws Exception {
-		doStop();
-	}
 }

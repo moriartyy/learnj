@@ -18,7 +18,7 @@ public class EntryPoint {
 			e.printStackTrace();
 		}
 		
-		server.close();
-		client.close();
+		server.stop();
+		client.stop();
 	}
 }

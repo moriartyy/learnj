@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Config {
     public String name() {
-        return "Hello";
+        return "hello";
     }
 
     public String getName() {
-        return "Hello";
+        return "hello";
     }
 }

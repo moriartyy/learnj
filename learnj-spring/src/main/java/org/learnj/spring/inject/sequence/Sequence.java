@@ -1,6 +1,5 @@
 package org.learnj.spring.inject.sequence;
 
-import org.learnj.spring.inject.property.Bootstrap;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -14,6 +13,6 @@ public class Sequence {
         context.start();
 
         SubClass subClass = context.getBean(SubClass.class);
-        subClass.Hello();
+        subClass.hello();
     }
 }

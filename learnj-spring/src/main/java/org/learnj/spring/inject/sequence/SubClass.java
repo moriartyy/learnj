@@ -13,7 +13,7 @@ public class SubClass extends Base {
         System.out.println(injectee.name());
     }
 
-    public void Hello() {
+    public void hello() {
         System.out.println("heelo");
     }
 }

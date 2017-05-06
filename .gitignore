@@ -1,9 +1,9 @@
-/target/
-/.settings/
-/releases/
+*target/
+*/.settings/
+*/releases/
 .project
 .classpath
-/.idea/
+*.idea/
 */logs/
 *.class
 *.log

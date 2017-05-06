@@ -1,6 +1,6 @@
 package org.learnj.concurrent;
 
-public class SafelyCloseThread {
+public class HowToSafelyCloseThread {
 	
 	private volatile boolean stop;
 	private Thread thread;
@@ -11,10 +11,9 @@ public class SafelyCloseThread {
 			
 			@Override
 			public void run() {
-				while (true && !stop) {
+				while (!stop) {
 					long lastPrint = System.currentTimeMillis();
 					System.out.println(lastPrint);
-					while ((System.currentTimeMillis() - lastPrint) < 1000) {}
 				}
 			}
 		};
@@ -27,7 +26,7 @@ public class SafelyCloseThread {
 	
 	public static void main(String[] args) {
 		
-		final SafelyCloseThread t = new SafelyCloseThread();
+		final HowToSafelyCloseThread t = new HowToSafelyCloseThread();
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			

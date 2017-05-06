@@ -8,10 +8,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class Injectee {
 
-    public static Injectee INSTANCE;
+    private static Injectee INSTANCE;
+
+    static Injectee getINSTANCE() {
+        return INSTANCE;
+    }
+
+    static void setINSTANCE(Injectee instance) {
+        INSTANCE = instance;
+    }
 
     public Injectee() {
-        INSTANCE = this;
+        setINSTANCE(this);
     }
 
     public String name() {

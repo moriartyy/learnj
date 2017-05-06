@@ -20,9 +20,9 @@ public class StaticPropertyBean {
         return staticInjecteeName;
     }
 
-    private static String staticInjecteeName = Injectee.INSTANCE.name();
+    private static String staticInjecteeName = Injectee.getINSTANCE().name();
 
-    private String instanceInjecteeName = Injectee.INSTANCE.name();
+    private String instanceInjecteeName = Injectee.getINSTANCE().name();
 
     public static Injectee getStaticSetterInjectee() {
         return staticSetterInjectee;

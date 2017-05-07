@@ -11,7 +11,9 @@ public enum RestStatus {
     OK(200, "OK"),
     CREATED(201, "Created"),
     NOT_FOUND(404, "Not Found"),
-    VALIDATION_FAILED(422, "Validation Failed"),
+    UNAUTHORIZED(401, "Unauthorized"),
+    FORBIDDEN(403, "Forbidden"),
+    BAD_REQUEST(400, "Bad Request"),
     INTERNAL_ERROR(500, "Internal Error"),;
 
 

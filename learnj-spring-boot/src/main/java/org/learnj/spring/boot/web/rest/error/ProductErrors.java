@@ -9,6 +9,6 @@ import static org.learnj.spring.boot.web.rest.RestErrors.of;
  */
 public class ProductErrors {
 
-    public static RestError EmptyName = of(100, "Product name cat not be empty");
+    public static final RestError EmptyName = of(100, "Product name cat not be empty");
 
 }

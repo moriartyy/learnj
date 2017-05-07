@@ -6,19 +6,19 @@ import org.learnj.spring.boot.web.rest.RestException;
 import org.learnj.spring.boot.web.rest.RestStatus;
 
 /**
- * @author Loster on 5/5/17.
+ * @author Loster on 5/7/17.
  */
-public class ValidationException extends RestException {
+public class UnauthorizedException extends RestException {
 
-    public ValidationException(RestError error) {
-        super(RestStatus.BAD_REQUEST, error);
+    public UnauthorizedException(RestError error) {
+        super(RestStatus.UNAUTHORIZED, error);
     }
 
-    public ValidationException(String message) {
+    public UnauthorizedException(String message) {
         this(RestErrors.of(message));
     }
 
-    public ValidationException(int code, String message) {
+    public UnauthorizedException(int code, String message) {
         this(RestErrors.of(code, message));
     }
 }

@@ -1,6 +1,7 @@
 package org.learnj.spring.boot.web.rest.validation;
 
 import org.learnj.spring.boot.web.rest.RestError;
+import org.learnj.spring.boot.web.rest.exception.MissingParameterException;
 import org.learnj.spring.boot.web.rest.exception.ValidationException;
 
 import static org.learnj.spring.boot.web.rest.RestErrors.of;
@@ -10,19 +11,19 @@ import static org.learnj.spring.boot.web.rest.RestErrors.of;
  */
 public class GeneralValidator {
 
-    public static String checkNotEmpty(String target, String message) {
-        return checkNotEmpty(target, of(message));
-    }
-
-    public static String checkNotEmpty(String target, RestError error) {
-        if (target == null || target.length() == 0) {
-            throw new ValidationException(error);
+    public static String checkNotEmpty(String parameterName, String parameterValue) {
+        if (parameterValue == null || parameterValue.length() == 0) {
+            throw new MissingParameterException(parameterName);
         }
-        return target;
+        return parameterValue;
     }
 
     public static void checkExpression(boolean expression, String errorMessage) {
         checkExpression(expression, of(errorMessage));
+    }
+
+    public static void checkExpression(boolean expression, int errorCode, String errorMessage) {
+        checkExpression(expression, of(errorCode, errorMessage));
     }
 
     public static void checkExpression(boolean expression, RestError error) {

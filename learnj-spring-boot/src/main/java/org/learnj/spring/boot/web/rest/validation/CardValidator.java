@@ -1,6 +1,7 @@
 package org.learnj.spring.boot.web.rest.validation;
 
-import org.learnj.spring.boot.web.rest.error.CardErrors;
+import org.learnj.spring.boot.web.rest.error.CardError;
+import org.learnj.spring.boot.web.rest.exception.EntityNotExistException;
 import org.learnj.spring.boot.web.rest.exception.ValidationException;
 import org.learnj.spring.boot.web.rest.service.Card;
 import org.learnj.spring.boot.web.rest.service.CardService;
@@ -25,7 +26,7 @@ public class CardValidator implements SmartInitializingSingleton {
     }
 
     public static String checkNumber(String number) {
-        return GeneralValidator.checkNotEmpty(number, CardErrors.EmptyNumber);
+        return GeneralValidator.checkNotEmpty("number", number);
     }
 
     public static Card checkExist(String number) {
@@ -34,7 +35,7 @@ public class CardValidator implements SmartInitializingSingleton {
         checkNumber(number);
         Card card = cardService.get(number);
         if (card == null) {
-            throw new ValidationException(CardErrors.NotExist);
+            throw new EntityNotExistException("card");
         }
         return card;
     }

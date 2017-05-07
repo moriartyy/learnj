@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductController {
 
     @RequestMapping("/products")
-    public RestResponse<List<String>> list() {
+    public RestResponse list() {
         List<String> list = new ArrayList<>();
         list.add("iphone5");
         list.add("iphone6");
@@ -32,7 +32,6 @@ public class ProductController {
 
     @RequestMapping("/products/iphone6")
     public Object iphone6() {
-        System.out.println(Thread.currentThread().getId());
         Validator.NotEmpty("", "This is empty");
         throw new RuntimeException();
     }

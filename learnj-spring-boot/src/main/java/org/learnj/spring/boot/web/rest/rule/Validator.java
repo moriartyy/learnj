@@ -1,6 +1,7 @@
 package org.learnj.spring.boot.web.rest.rule;
 
 import org.learnj.spring.boot.web.rest.RestError;
+import org.learnj.spring.boot.web.rest.RestErrors;
 import org.learnj.spring.boot.web.rest.exception.ValidationException;
 
 /**
@@ -9,7 +10,7 @@ import org.learnj.spring.boot.web.rest.exception.ValidationException;
 public class Validator {
 
     public static void NotEmpty(String target, String message) {
-        NotEmpty(target, RestError.of(message));
+        NotEmpty(target, RestErrors.of(message));
     }
 
     public static void NotEmpty(String target, RestError error) {

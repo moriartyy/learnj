@@ -2,7 +2,7 @@ package org.learnj.spring.boot.web.rest.error;
 
 import org.learnj.spring.boot.web.rest.RestError;
 
-import static org.learnj.spring.boot.web.rest.RestError.of;
+import static org.learnj.spring.boot.web.rest.RestErrors.of;
 
 /**
  * @author Loster on 5/6/17.

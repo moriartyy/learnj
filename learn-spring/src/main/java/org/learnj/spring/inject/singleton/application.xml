@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="org.learnj.spring.inject.singleton"/>
+    <bean name="injectee" class="org.learnj.spring.inject.singleton.Injectee"/>
+    <bean name="staticSingletonBean" class="org.learnj.spring.inject.singleton.StaticSingletonBean">
+        <property name="fullName" value="ddddd"/>
+    </bean>
+<!--<bean name="ddd" class="org.learnj.spring.inject.singleton.StaticSingletonBeanInitializer">-->
+    <!--<property name="instance" ref="staticSingletonBean"/>-->
+<!--</bean>-->
+
+    <!--<bean name="staticPropertyBean" class="org.learnj.spring.inject.property.StaticPropertyBean">-->
+        <!--<property name="staticSetterInjectee" ref="injectee"/>-->
+        <!--<property name="instanceInjectee" ref="injectee"/>-->
+    <!--</bean>-->
+
+</beans>

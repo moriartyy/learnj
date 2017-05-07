@@ -13,7 +13,8 @@ import java.io.IOException;
 public class RestErrorSerializer extends JsonSerializer<RestError> {
 
     @Override
-    public void serialize(RestError error, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
+    public void serialize(RestError error, JsonGenerator gen, SerializerProvider serializers)
+            throws IOException {
         if (error instanceof CodedRestError) {
             CodedRestError codedError = (CodedRestError)error;
             gen.writeStartObject();

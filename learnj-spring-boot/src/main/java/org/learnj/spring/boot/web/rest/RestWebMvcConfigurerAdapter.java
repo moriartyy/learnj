@@ -1,15 +1,12 @@
 package org.learnj.spring.boot.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.learnj.spring.boot.web.rest.filter.CardNumberDecryptFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.List;
 
 /**
  * @author Loster on 5/6/17.
@@ -20,6 +17,13 @@ public class RestWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Bean
     private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter(ObjectMapper objectMapper) {
         return new RestMessageConverter(objectMapper);
+    }
+
+    @Bean
+    private FilterRegistrationBean cardNumberDecryptFilterRegistrationBean() {
+        FilterRegistrationBean registration = new FilterRegistrationBean(new CardNumberDecryptFilter());
+        registration.addUrlPatterns("/*");
+        return registration;
     }
 
 //    @Override
